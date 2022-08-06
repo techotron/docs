@@ -107,7 +107,7 @@ To express this as a sequence diagram:
 ### 4. Service Account Token/JWT
 This section will answer _how_ the service account gets it's JWT. 
 
-- Every pod by default as a service account JWT **but** the default service account has no `exp` (expiry) claim. Having a trusted JWT with no expiry would be a bad. This is the problem that the mutating webhook solves.
+- Every pod by default as a service account JWT **but** the default service account has no `exp` (expiry) claim. Having a trusted JWT with no expiry would be a bad. This is the problem that the [mutating webhook](https://github.com/aws/amazon-eks-pod-identity-webhook) solves.
 - The webhook leverages the [Service Account Token Volume Projection](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#service-account-token-volume-projection) feature, which provides a pod with a newly created JWT that contains a specified audience and expiration. 
 - The cluster will automatically rotate and update this token for as long as the pod is running
 - In order to use this feature, the Kube API server needs to be configured with the following flags:
